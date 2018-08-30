@@ -9280,6 +9280,7 @@ return jQuery;
             sequenceOptions.toolbar = options.toolbar === undefined ? false : options.toolbar;
             sequenceOptions.badge = options.badge === undefined ? true : options.badge;
             sequenceOptions.fasta = options.fasta === undefined ? true : options.fasta;
+            sequenceOptions.apiURL = options.apiURL === undefined ? true : options.apiURL;
             sequenceOptions.blast = options.blast === undefined ? true : options.blast;
             
             sequenceOptions.header = options.header ? {
@@ -9335,8 +9336,15 @@ return jQuery;
                 }
                 if (isoName !== "") {
                     if (sequenceOptions.fasta){
+                        var apiURL = "https://www.nextprot.org";
+                        if(sequenceOptions.apiURL) {
+                            apiURL = sequenceOptions.apiURL;
+                        }
                         $(divID + " .sequenceToolbar").append(
-                            "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank'>View FASTA</a>"
+                            // TODO: should point to prod instead of alpha once this service is available !
+                            //"<a class=\"btn btn-default btn-sm fasta-link\" href=\"https://api.nextprot.org/isoform/" + isoName + ".fasta target='_blank'>View FASTA</a>" +
+                            "<a class=\"btn btn-default btn-sm fasta-link\" href=\""+ apiURL +"/isoform/" + isoName + ".fasta\" target='_blank'>View FASTA</a>"
+    //                        "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank'>View FASTA</a>"
     //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast sequence</a>" +
     //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast selection</a>"
     //                        '<div class="btn-group" role="group" aria-label="..." style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Soon to be implemented">' +
